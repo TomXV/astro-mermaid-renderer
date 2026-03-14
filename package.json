@@ -1,5 +1,5 @@
 {
-  "name": "astro-mermaid-renderer",
+  "name": "@tomxv/astro-mermaid-renderer",
   "version": "0.1.0",
   "description": "Astro で Mermaid 図を描画するコンポーネント集。SVGレンダリング・ズーム/パン対応プレビューモーダル・Markdownコードブロック変換を提供します。",
   "keywords": ["astro", "mermaid", "diagram", "svg", "component"],

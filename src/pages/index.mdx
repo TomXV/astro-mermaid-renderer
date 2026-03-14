@@ -1,0 +1,61 @@
+---
+layout: ../layouts/Layout.astro
+---
+
+import MermaidLoader from "../components/MermaidLoader.astro";
+
+# astro-mermaid-renderer
+
+Mermaid記法をAstroコンポーネントとしてシンプルに統合。
+クリックでズーム・パン可能なプレビューモーダルも標準搭載。
+
+[Debug ページを開く →](/debug)
+
+---
+
+## 使い方
+
+MDXファイル内でコードフェンスを使ってそのまま書けます。
+
+````md
+```mermaid
+graph LR
+  A --> B --> C
+```
+````
+
+---
+
+## サンプル図
+
+### Flowchart
+
+```mermaid
+graph LR
+  A[Mermaid記法] --> B[MermaidLoader]
+  B --> C[SVGレンダリング]
+  C --> D[インタラクティブプレビュー]
+```
+
+### Sequence Diagram
+
+```mermaid
+sequenceDiagram
+  participant Dev as 開発者
+  participant Astro as Astro
+  participant Lib as astro-mermaid-renderer
+  Dev->>Astro: ページにMermaidコンポーネントを配置
+  Astro->>Lib: MermaidLoader を読み込む
+  Lib-->>Dev: SVG図として描画
+```
+
+---
+
+## 機能
+
+- **SVGレンダリング** — Mermaid記法をブラウザ上でSVGへ変換
+- **プレビューモーダル** — 図をクリックするとズーム・パン対応のモーダルが開く
+- **コードフェンス記法対応** — ` ```mermaid ` をそのまま記述可能
+- **タッチ操作対応** — ピンチズームやドラッグをモバイルでも利用可能
+
+<MermaidLoader />

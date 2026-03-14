@@ -1,12 +1,30 @@
 {
   "name": "astro-mermaid-renderer",
+  "bin": {
+    "astro-mermaid-renderer": "./index.ts"
+  },
   "module": "index.ts",
   "type": "module",
   "private": true,
+  "scripts": {
+    "dev": "bun run index.ts dev",
+    "debug": "bun run index.ts debug",
+    "build": "bun run index.ts build",
+    "preview": "bun run index.ts preview",
+    "check": "bun run index.ts check",
+    "format:check": "bun run index.ts format:check"
+  },
   "devDependencies": {
-    "@types/bun": "latest"
+    "@types/bun": "latest",
+    "astro": "6.0.4",
+    "prettier": "^3.6.2",
+    "prettier-plugin-astro": "^0.14.1"
   },
   "peerDependencies": {
     "typescript": "^5"
+  },
+  "dependencies": {
+    "@astrojs/mdx": "^5.0.0",
+    "unist-util-visit": "^5.1.0"
   }
 }

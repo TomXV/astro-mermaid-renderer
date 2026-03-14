@@ -1,0 +1,196 @@
+---
+interface Props {
+  title?: string;
+  shellClass?: string;
+}
+
+const { title = "astro-mermaid-renderer", shellClass = "prose-shell" } = Astro.props;
+---
+
+<html lang="ja">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+  </head>
+  <body>
+    <main class={shellClass}>
+      <slot />
+    </main>
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    font-family:
+      "IBM Plex Sans JP",
+      "Hiragino Sans",
+      "Noto Sans JP",
+      sans-serif;
+    font-size: 1rem;
+    line-height: 1.75;
+    color: #14213d;
+    background:
+      radial-gradient(circle at top, rgb(244 196 48 / 0.22), transparent 28rem),
+      linear-gradient(180deg, #f8fafc 0%, #eef2f7 100%);
+    min-height: 100dvh;
+  }
+
+  .prose-shell {
+    width: min(780px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 3rem 0 5rem;
+  }
+
+  .debug-shell {
+    width: min(1120px, calc(100% - 2rem));
+    margin: 0 auto;
+    padding: 2rem 0 4rem;
+  }
+
+  /* ── Headings ── */
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: "Averia Serif Libre", "Times New Roman", serif;
+    line-height: 1.15;
+    color: #0f172a;
+  }
+
+  h1 {
+    margin: 0 0 0.4rem;
+    font-size: clamp(2.2rem, 6vw, 3.8rem);
+    letter-spacing: -0.02em;
+    /* 装飾ライン */
+    padding-bottom: 0.5rem;
+    border-bottom: 3px solid #f4c430;
+  }
+
+  h2 {
+    margin: 2.5rem 0 0.6rem;
+    font-size: clamp(1.35rem, 3vw, 1.8rem);
+    padding-bottom: 0.3rem;
+    border-bottom: 1px solid rgb(20 33 61 / 0.12);
+  }
+
+  h3 {
+    margin: 1.8rem 0 0.5rem;
+    font-size: 1.15rem;
+  }
+
+  /* ── Body text ── */
+  p {
+    margin: 0.6rem 0 1rem;
+    color: #2d3748;
+  }
+
+  /* ── Links ── */
+  a {
+    color: #9a6700;
+    text-underline-offset: 3px;
+    transition: color 0.15s;
+  }
+
+  a:hover {
+    color: #c07c00;
+  }
+
+  /* ── Lists ── */
+  ul,
+  ol {
+    padding-left: 1.4rem;
+    margin: 0.5rem 0 1rem;
+  }
+
+  li {
+    margin: 0.35rem 0;
+    color: #2d3748;
+  }
+
+  li strong {
+    color: #0f172a;
+  }
+
+  /* ── Horizontal rule ── */
+  hr {
+    border: none;
+    border-top: 1px solid rgb(20 33 61 / 0.1);
+    margin: 2.5rem 0;
+  }
+
+  /* ── Inline code ── */
+  code:not(pre code) {
+    font-family: "IBM Plex Mono", "Fira Code", monospace;
+    font-size: 0.88em;
+    background: rgb(244 196 48 / 0.18);
+    border: 1px solid rgb(244 196 48 / 0.35);
+    border-radius: 5px;
+    padding: 0.12em 0.45em;
+    color: #7c4a00;
+  }
+
+  /* ── Code fence blocks ── */
+  pre {
+    margin: 1.25rem 0;
+    padding: 1.1rem 1.25rem;
+    border-radius: 16px;
+    background: #1e293b;
+    color: #e2e8f0;
+    overflow-x: auto;
+    font-family: "IBM Plex Mono", "Fira Code", monospace;
+    font-size: 0.9rem;
+    line-height: 1.65;
+    border: 1px solid rgb(255 255 255 / 0.06);
+    box-shadow: 0 8px 24px rgb(15 23 42 / 0.18);
+  }
+
+  pre code {
+    background: none;
+    border: none;
+    padding: 0;
+    color: inherit;
+    font-size: inherit;
+  }
+
+  /* ── Mermaid figure wrapper ── */
+  .mermaid {
+    margin: 1.5rem 0;
+    padding: 1rem;
+    background: #fff;
+    border: 1px solid rgb(20 33 61 / 0.09);
+    border-radius: 20px;
+    box-shadow: 0 6px 20px rgb(20 33 61 / 0.06);
+    overflow-x: auto;
+    cursor: zoom-in;
+    transition: box-shadow 0.2s;
+  }
+
+  .mermaid:hover {
+    box-shadow: 0 10px 32px rgb(20 33 61 / 0.12);
+  }
+
+  .mermaid svg {
+    display: block;
+    height: auto;
+  }
+
+  @media (max-width: 640px) {
+    .prose-shell,
+    .debug-shell {
+      width: calc(100% - 1.5rem);
+      padding-top: 1.5rem;
+    }
+
+    h1 {
+      font-size: clamp(1.8rem, 8vw, 2.4rem);
+    }
+  }
+</style>

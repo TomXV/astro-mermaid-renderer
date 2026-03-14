@@ -1,0 +1,180 @@
+---
+layout: ../layouts/Layout.astro
+title: Mermaid Debug Page
+shellClass: debug-shell
+---
+
+import Mermaid from "../components/Mermaid.astro";
+import MermaidLoader from "../components/MermaidLoader.astro";
+
+export const flowchart = `graph TD
+  Start([Start]) --> Parse[Parse Mermaid source]
+  Parse --> Render[Render SVG]
+  Render --> Bind[Bind preview trigger]
+  Bind --> Preview{Open preview?}
+  Preview -->|Yes| Zoom[Zoom / Pan]
+  Preview -->|No| End([End])
+  Zoom --> End
+`;
+
+export const sequence = `sequenceDiagram
+  participant U as User
+  participant P as Page
+  participant L as MermaidLoader
+  participant M as Mermaid
+  U->>P: Open /debug
+  P->>L: Load singleton script
+  L->>M: Render .mermaid nodes
+  M-->>U: Show interactive diagram
+`;
+
+<header class="hero">
+  <p class="eyebrow">astro-mermaid-renderer</p>
+  <h1>Mermaid Debug Page</h1>
+  <p class="lead">
+    レンダリング、プレビュー、Markdown 風コードブロック変換をまとめて確認するためのページです。
+  </p>
+</header>
+
+<section class="panel">
+  <div class="panel__header">
+    <h2>Component Render</h2>
+    <p><code>Mermaid.astro</code> を直接使うケースです。</p>
+  </div>
+  <Mermaid chart={flowchart} />
+</section>
+
+<section class="panel">
+  <div class="panel__header">
+    <h2>Second Diagram</h2>
+    <p>複数図の連続描画とプレビュー操作を確認できます。</p>
+  </div>
+  <Mermaid chart={sequence} />
+</section>
+
+<section class="panel">
+  <div class="panel__header">
+    <h2>Markdown Block Upgrade</h2>
+    <p>
+      <code>pre[data-language="mermaid"]</code> と <code>code.language-mermaid</code> の両方が
+      <code>.mermaid</code> へ昇格されるか確認できます。
+    </p>
+  </div>
+  <div class="sample-grid">
+    <article class="sample-card">
+      <h3>pre[data-language="mermaid"]</h3>
+      <pre data-language="mermaid">{`flowchart LR
+  Docs[docs/reference.md] --> Loader[MermaidLoader]
+  Loader --> Flags[data-mermaid-rendered]
+  Flags --> Preview[Preview modal]
+`}</pre>
+    </article>
+    <article class="sample-card">
+      <h3>{"pre > code.language-mermaid"}</h3>
+      <pre><code class="language-mermaid">{`stateDiagram-v2
+  [*] --> Idle
+  Idle --> Rendering: render()
+  Rendering --> PreviewReady: bind preview
+  PreviewReady --> [*]
+`}</code></pre>
+    </article>
+  </div>
+</section>
+
+<section class="panel checklist">
+  <div class="panel__header">
+    <h2>Quick Checklist</h2>
+    <p>手元確認用の観点です。</p>
+  </div>
+  <ul>
+    <li>図が SVG として描画される</li>
+    <li>図をクリックまたは Enter / Space でプレビューが開く</li>
+    <li>ズーム、実寸、全体表示、閉じる操作が動作する</li>
+    <li>ホイール、ドラッグ、タッチ操作が継続して使える</li>
+    <li>コードブロックの自動変換が二重実行されない</li>
+  </ul>
+</section>
+
+<MermaidLoader />
+
+<style>{`
+  .panel__header p,
+  .lead,
+  li {
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+
+  .hero {
+    padding: 2rem;
+    margin: 1rem 0 1.5rem;
+    border: 1px solid rgb(20 33 61 / 0.08);
+    border-radius: 28px;
+    background:
+      linear-gradient(135deg, rgb(255 255 255 / 0.96), rgb(255 248 230 / 0.96));
+    box-shadow: 0 20px 40px rgb(20 33 61 / 0.08);
+  }
+
+  .eyebrow {
+    margin: 0 0 0.5rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    font-size: 0.82rem;
+    color: #9a6700;
+  }
+
+  .panel {
+    margin: 1.25rem 0;
+    padding: 1.25rem;
+    border-radius: 24px;
+    background: rgb(255 255 255 / 0.9);
+    border: 1px solid rgb(20 33 61 / 0.08);
+    box-shadow: 0 16px 40px rgb(20 33 61 / 0.06);
+  }
+
+  .panel__header {
+    margin-bottom: 0.75rem;
+  }
+
+  .panel__header p {
+    margin: 0.35rem 0 0;
+    color: #4a5568;
+  }
+
+  .sample-grid {
+    display: grid;
+    gap: 1rem;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  }
+
+  .sample-card {
+    padding: 1rem;
+    border-radius: 18px;
+    background: #f8fafc;
+    border: 1px solid #d8e0ea;
+  }
+
+  .sample-card pre {
+    margin: 0;
+    padding: 0.75rem;
+    overflow-x: auto;
+    border-radius: 14px;
+    background: #1e293b;
+    color: #e2e8f0;
+    font-family: "IBM Plex Mono", "Fira Code", monospace;
+    font-size: 0.88rem;
+  }
+
+  .checklist ul {
+    padding-left: 1.2rem;
+    margin: 0;
+  }
+
+  @media (max-width: 640px) {
+    .hero,
+    .panel {
+      padding: 1rem;
+      border-radius: 20px;
+    }
+  }
+`}</style>

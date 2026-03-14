@@ -40,6 +40,7 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
+      id-token: write
 
     steps:
       - uses: actions/checkout@v4
@@ -57,6 +58,4 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Publish
-        run: npm publish --registry https://registry.npmjs.org --access public
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+        run: npm publish --provenance --access public

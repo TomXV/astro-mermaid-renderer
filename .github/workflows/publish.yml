@@ -40,22 +40,24 @@ jobs:
     runs-on: ubuntu-latest
     permissions:
       contents: read
-      id-token: write
+      id-token: write # for OIDC
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout code
+        uses: actions/checkout@v4
 
-      - uses: oven-sh/setup-bun@v2
+      - name: Setup Node
+        uses: actions/setup-node@v5
         with:
-          bun-version: latest
-
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "20"
+          node-version: "24.x"
           registry-url: "https://registry.npmjs.org"
 
       - name: Install dependencies
-        run: bun install --frozen-lockfile
+        uses: oven-sh/setup-bun@v2
+        with:
+          bun-version: latest
 
-      - name: Publish
+      - run: bun install --frozen-lockfile
+
+      - name: Publish to npm
         run: npm publish --provenance --access public

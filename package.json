@@ -1,11 +1,26 @@
 {
-  "name": "astro-mermaid-renderer",
-  "bin": {
-    "astro-mermaid-renderer": "./index.ts"
+  "name": "@tomxv/astro-mermaid-renderer",
+  "version": "0.1.0",
+  "description": "Astro で Mermaid 図を描画するコンポーネント集。SVGレンダリング・ズーム/パン対応プレビューモーダル・Markdownコードブロック変換を提供します。",
+  "keywords": ["astro", "mermaid", "diagram", "svg", "component"],
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TomXV/astro-mermaid-renderer.git"
   },
-  "module": "index.ts",
   "type": "module",
-  "private": true,
+  "exports": {
+    "./Mermaid.astro": "./src/components/Mermaid.astro",
+    "./MermaidLoader.astro": "./src/components/MermaidLoader.astro",
+    "./remark-mermaid": "./src/plugins/remark-mermaid.mjs"
+  },
+  "files": [
+    "src/components",
+    "src/plugins"
+  ],
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com"
+  },
   "scripts": {
     "dev": "bun run index.ts dev",
     "debug": "bun run index.ts debug",
@@ -14,17 +29,18 @@
     "check": "bun run index.ts check",
     "format:check": "bun run index.ts format:check"
   },
+  "peerDependencies": {
+    "astro": ">=4.0.0",
+    "typescript": "^5"
+  },
+  "dependencies": {
+    "unist-util-visit": "^5.1.0"
+  },
   "devDependencies": {
+    "@astrojs/mdx": "^5.0.0",
     "@types/bun": "latest",
     "astro": "6.0.4",
     "prettier": "^3.6.2",
     "prettier-plugin-astro": "^0.14.1"
-  },
-  "peerDependencies": {
-    "typescript": "^5"
-  },
-  "dependencies": {
-    "@astrojs/mdx": "^5.0.0",
-    "unist-util-visit": "^5.1.0"
   }
 }

@@ -1,6 +1,6 @@
 {
   "name": "astro-mermaid-renderer",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Astro で Mermaid 図を描画するコンポーネント集。SVGレンダリング・ズーム/パン対応プレビューモーダル・Markdownコードブロック変換を提供します。",
   "keywords": ["astro", "mermaid", "diagram", "svg", "component"],
   "license": "MIT",

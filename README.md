@@ -78,4 +78,27 @@ graph TD
 
 ## Development
 
-実装や変更方針は `AGENTS.md` と `docs/reference.md` を参照してください。コントリビューション手順は [CONTRIBUTING.md](CONTRIBUTING.md) にまとめています。
+実装や変更方針は `docs/reference.md` を参照してください。コントリビューション手順は [CONTRIBUTING.md](CONTRIBUTING.md) にまとめています。
+
+### Bun CLI
+
+Bun を入口にしたコマンドを用意しています。
+
+```bash
+bun install
+bun run dev
+bun run debug
+bun run build
+bun run check
+```
+
+`bun run dev` や `bun run debug` を使う前に、ローカル依存の `astro` と `prettier` を入れるため `bun install` を先に実行してください。
+
+- `bun run dev`
+  - Astro dev server を起動します
+- `bun run debug`
+  - dev server を起動し、デバッグページ `/debug` の確認用に使います
+- `bun run build`
+  - Astro build を実行します
+- `bun run check`
+  - Prettier check と Astro build を順番に実行します

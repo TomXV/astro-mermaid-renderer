@@ -6,8 +6,8 @@
 
 対象コンポーネント:
 
-- `src/components/mermaid-renderer/src/Mermaid.astro`
-- `src/components/mermaid-renderer/src/MermaidLoader.astro`
+- `src/components/Mermaid.astro`
+- `src/components/MermaidLoader.astro`
 
 ---
 
@@ -189,13 +189,13 @@ window.mermaid.initialize({
 
 ```astro
 ---
-import Mermaid from "../components/mermaid-renderer/src/Mermaid.astro";
+import Mermaid from "../components/Mermaid.astro";
 ---
 
 <Mermaid chart={`graph TD\n  A --> B`} />
 ```
 
-本リポジトリでは `src/layouts/Layout.astro` で `MermaidLoader.astro` を全ページ共通で 1 回読み込んでいる。
+本リポジトリでは各ページ末尾で `MermaidLoader.astro` を 1 回読み込んでいる。
 
 ---
 

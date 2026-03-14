@@ -46,8 +46,14 @@ Preview modal で維持する操作:
 コミット前に次を実行してください。
 
 ```bash
-bunx prettier ./src/components/Mermaid.astro ./src/components/MermaidLoader.astro --plugin prettier-plugin-astro --check
+bunx prettier ./src/components/Mermaid.astro ./src/components/MermaidLoader.astro ./src/pages/debug.astro --plugin prettier-plugin-astro --check
 npx astro build --silent
+```
+
+または Bun CLI から次を実行できます。
+
+```bash
+bun run check
 ```
 
 依存関係を変更した場合は、CI と Cloudflare 向けに lockfile も整合させてください。特に `pnpm-lock.yaml` を使う構成に広げる場合は更新漏れに注意してください。

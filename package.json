@@ -1,5 +1,5 @@
 {
-  "name": "@tomxv/astro-mermaid-renderer",
+  "name": "astro-mermaid-renderer",
   "version": "0.1.0",
   "description": "Astro で Mermaid 図を描画するコンポーネント集。SVGレンダリング・ズーム/パン対応プレビューモーダル・Markdownコードブロック変換を提供します。",
   "keywords": ["astro", "mermaid", "diagram", "svg", "component"],
@@ -18,9 +18,6 @@
     "src/components",
     "src/plugins"
   ],
-  "publishConfig": {
-    "registry": "https://npm.pkg.github.com"
-  },
   "scripts": {
     "dev": "bun run index.ts dev",
     "debug": "bun run index.ts debug",

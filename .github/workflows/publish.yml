@@ -28,13 +28,15 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Publish
-        run: npm publish
+        run: npm publish --registry https://npm.pkg.github.com --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
   publish-npm:
     name: Publish to npmjs
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
 
     steps:
       - uses: actions/checkout@v4
@@ -52,6 +54,6 @@ jobs:
         run: bun install --frozen-lockfile
 
       - name: Publish
-        run: npm publish --access public
+        run: npm publish --registry https://registry.npmjs.org --access public
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}

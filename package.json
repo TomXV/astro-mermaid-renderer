@@ -12,7 +12,10 @@
   "exports": {
     "./Mermaid.astro": "./src/components/Mermaid.astro",
     "./MermaidLoader.astro": "./src/components/MermaidLoader.astro",
-    "./remark-mermaid": "./src/plugins/remark-mermaid.mjs"
+    "./remark-mermaid": {
+      "types": "./src/plugins/remark-mermaid.d.ts",
+      "default": "./src/plugins/remark-mermaid.mjs"
+    }
   },
   "files": [
     "src/components",
